@@ -54,3 +54,143 @@ li {
         grid-template-columns: 1fr;
     }
 }
+
+/* Chore form */
+#choreForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+#choreForm label {
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+#choreForm input,
+#choreForm select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+#choreForm button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #234b63;
+    color: white;
+    cursor: pointer;
+}
+
+#choreForm button:hover {
+    background-color: #326c87;
+}
+
+/* Chore list */
+#choreList {
+    list-style: none;
+    padding: 0;
+}
+
+.chore-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px;
+    margin-bottom: 10px;
+    background: #f4f6f8;
+    border-radius: 8px;
+}
+
+.chore-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.chore-details p {
+    margin: 5px 0 0;
+    font-size: 13px;
+    color: #666;
+}
+
+.chore-item.completed strong {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.delete-btn {
+    background-color: #bd3d3d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #922c2c;
+}
+
+/* Expense management */
+#expenseForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+#expenseForm input,
+#expenseForm select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+#expenseForm button {
+    background: #234b63;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+}
+
+#expenseList {
+    list-style: none;
+    padding: 0;
+}
+
+#expenseList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    background: #f4f6f8;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+#expenseList button {
+    background: #bd3d3d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+#totalExpenses {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+@media (max-width: 600px) {
+    #expenseList li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

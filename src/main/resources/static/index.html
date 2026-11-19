@@ -1,68 +1,168 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
     <title>HomeSlice | Dashboard</title>
-    <link rel="stylesheet" href="/styles.css">
+
+    <!-- Connect the CSS stylesheet -->
+    <link rel="stylesheet" href="./styles.css">
+
+    <!-- Load JavaScript after the HTML is parsed -->
+    <script src="./app.js" defer></script>
 </head>
 
 <body>
 
+<!-- HomeSlice Header -->
 <header>
     <h1>HomeSlice</h1>
     <p>Making shared living easier.</p>
 </header>
 
+<section class="card" id="expenses">
+
+    <h2>Expense Management</h2>
+    <p>Keep track of shared household expenses.</p>
+
+    <form id="expenseForm">
+
+        <label for="expenseName">Expense Name</label>
+        <input
+                type="text"
+                id="expenseName"
+                placeholder="Example: Electric bill"
+                required
+        >
+
+        <label for="expenseAmount">Amount ($)</label>
+        <input
+                type="number"
+                id="expenseAmount"
+                min="0.01"
+                step="0.01"
+                placeholder="Enter amount"
+                required
+        >
+
+        <label for="paidBy">Paid By</label>
+        <select id="paidBy" required>
+            <option value="">Select Roommate</option>
+            <option value="1">Alex</option>
+            <option value="2">Jordan</option>
+            <option value="3">Taylor</option>
+        </select>
+
+        <button type="submit">Add Expense</button>
+
+    </form>
+
+    <h3>Shared Expenses</h3>
+    <ul id="expenseList"></ul>
+
+    <p id="totalExpenses">Total Expenses: $0.00</p>
+
+</section>
+
 <main>
+
+    <!-- Welcome Section -->
     <section>
         <h2>Welcome Home!</h2>
         <p>Manage your household in one place.</p>
     </section>
 
+    <!-- Dashboard Overview -->
     <section class="dashboard">
+
+        <!-- Household Card -->
         <div class="card">
             <h3>Household</h3>
             <p>Apartment 101</p>
         </div>
 
+        <!-- Chores Card -->
         <div class="card">
             <h3>Chores</h3>
-            <p>3 pending chores</p>
+            <p>View and manage your household chores.</p>
         </div>
 
+        <!-- Expenses Card -->
         <div class="card">
             <h3>Expenses</h3>
             <p>$120 in shared expenses</p>
         </div>
+
     </section>
 
-
+    <!-- Chore Management Section -->
     <section class="card">
-        <h2>Upcoming Chores</h2>
 
+        <h2>Chore Management</h2>
+        <p>Assign and manage household chores.</p>
+
+        <!-- Add Chore Form -->
         <form id="choreForm">
+
+            <!-- Chore Name -->
+            <label for="choreName">Chore Name</label>
+
             <input
                     type="text"
                     id="choreName"
-                    placeholder="Enter a new chore"
+                    name="choreName"
+                    placeholder="Enter a chore"
+                    maxlength="100"
                     required
             >
 
-            <button type="submit">Add Chore</button>
+            <!-- Assign Roommate -->
+            <label for="assignedMember">Assign To</label>
+
+            <select
+                    id="assignedMember"
+                    name="assignedMember"
+                    required
+            >
+                <option value="">Select Roommate</option>
+                <option value="1">Alex</option>
+                <option value="2">Jordan</option>
+                <option value="3">Taylor</option>
+            </select>
+
+            <!-- Chore Due Date -->
+            <label for="dueDate">Due Date</label>
+
+            <input
+                    type="date"
+                    id="dueDate"
+                    name="dueDate"
+                    required
+            >
+
+            <!-- Submit Button -->
+            <button type="submit">
+                Add Chore
+            </button>
+
         </form>
 
-        <ul id="choreList">
-            <li>Clean Kitchen</li>
-            <li>Take Out Trash</li>
-            <li>Vacuum Living Room</li>
-        </ul>
+        <!-- Household Chore List -->
+        <h3>Household Chores</h3>
+
+        <!-- JavaScript updates the pending count -->
+        <p id="pendingChores">0 pending chores</p>
+
+        <!-- JavaScript adds chore items here -->
+        <ul id="choreList"></ul>
+
     </section>
 
 </main>
-<script src="/app.js"></script>
+
 </body>
 </html>
