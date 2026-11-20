@@ -295,7 +295,7 @@ button {
     background: #ad6936;
 }
 
-/* Mobile responsiveness */
+/* responsiveness actions with button */
 @media (max-width: 750px) {
     .dashboard {
         grid-template-columns: 1fr;
