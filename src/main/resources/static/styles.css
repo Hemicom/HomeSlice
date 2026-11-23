@@ -1,0 +1,248 @@
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: #f7f6f2;
+    color: #203f4b;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    line-height: 1.5;
+}
+
+/* Header & Navigation */
+header {
+    background: #203f4b;
+    color: white;
+    padding: 30px 25px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 36px;
+    margin: 0 0 6px;
+    letter-spacing: 1px;
+}
+
+header p {
+    color: #d8e2e5;
+    margin: 8px 0;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 22px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Main Content & Dashboard */
+main {
+    max-width: 1150px;
+    margin: 35px auto;
+    padding: 0 24px;
+}
+
+main h2,
+.card h3 {
+    color: #203f4b;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.card {
+    background: white;
+    padding: 26px;
+    border-radius: 14px;
+    border: 1px solid #e5e9eb;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    margin-bottom: 22px;
+}
+
+.dashboard .card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.10);
+}
+
+/* Shared Form & Button Styles */
+input,
+select,
+button {
+    font: inherit;
+}
+
+
+input:not([type="checkbox"]),
+select {
+    max-width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+
+
+input:focus,
+select:focus {
+    outline: 2px solid #ce8348;
+    outline-offset: 2px;
+}
+
+button {
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* Chore & Expense Forms */
+#choreForm,
+#expenseForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+
+#choreForm label,
+#expenseForm label {
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+#choreForm button,
+#expenseForm button {
+    padding: 12px;
+    border-radius: 8px;
+    background: #ce8348;
+    font-weight: 600;
+}
+
+#choreForm button:hover,
+#expenseForm button:hover {
+    background: #ad6936;
+}
+
+/* Chore List */
+#choreList,
+#expenseList {
+    list-style: none;
+    padding: 0;
+}
+
+.chore-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px;
+    margin-bottom: 10px;
+    background: #f4f6f8;
+    border-radius: 8px;
+}
+
+.chore-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.chore-details p {
+    margin: 5px 0 0;
+    font-size: 13px;
+    color: #666;
+}
+
+.chore-item.completed strong {
+    text-decoration: line-through;
+    color: #888;
+}
+
+/* Expense List */
+#expenseList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    background: #f4f6f8;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+#totalExpenses {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Delete Buttons */
+.delete-btn,
+#expenseList button {
+    background-color: #bd3d3d;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.delete-btn:hover,
+#expenseList button:hover {
+    background-color: #922c2c;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 750px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 28px;
+    }
+
+    main {
+        padding: 0 14px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 600px) {
+    #expenseList li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

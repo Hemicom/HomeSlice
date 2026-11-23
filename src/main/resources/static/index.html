@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeSlice | Dashboard</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./app.js" defer></script>
+</head>
+
+<body>
+
+<header>
+    <h1>HomeSlice</h1>
+    <p>Making shared living easier.</p>
+
+    <nav aria-label="Main navigation">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#chores">Chores</a>
+        <a href="#expenses">Expenses</a>
+    </nav>
+</header>
+
+<main>
+    <!-- Welcome -->
+    <section>
+        <h2>Welcome Home!</h2>
+        <p>Manage your household in one place.</p>
+    </section>
+
+    <!-- Dashboard Overview -->
+    <section id="dashboard" class="dashboard">
+        <div class="card">
+            <h3>Household</h3>
+            <p>Apartment 101</p>
+        </div>
+
+        <div class="card">
+            <h3>Chores</h3>
+            <p>View and manage your household chores.</p>
+        </div>
+
+        <div class="card">
+            <h3>Expenses</h3>
+            <p>Keep track of shared household expenses.</p>
+        </div>
+    </section>
+    <!-- Chore Management -->
+    <section id="chores" class="card">
+        <h2>Chore Management</h2>
+        <p>Assign and manage household chores.</p>
+
+        <form id="choreForm">
+            <label for="choreName">Chore Name</label>
+            <input type="text" id="choreName" name="choreName" placeholder="Enter a chore" maxlength="100" required>
+
+            <label for="assignedMember">Assign To</label>
+            <select id="assignedMember" name="assignedMember" required>
+                <option value="">Select Roommate</option>
+                <option value="1">Alex</option>
+                <option value="2">Jordan</option>
+                <option value="3">Taylor</option>
+            </select>
+
+            <label for="dueDate">Due Date</label>
+            <input type="date" id="dueDate" name="dueDate" required>
+
+            <button type="submit">Add Chore</button>
+        </form>
+
+        <h3>Household Chores</h3>
+        <p id="pendingChores">0 pending chores</p>
+        <ul id="choreList"></ul>
+    </section>
+
+    <!-- Expense Management -->
+    <section id="expenses" class="card">
+        <h2>Expense Management</h2>
+        <p>Keep track of shared household expenses.</p>
+
+        <form id="expenseForm">
+            <label for="expenseName">Expense Name</label>
+            <input type="text" id="expenseName" name="expenseName" placeholder="Example: Electric bill" required>
+
+            <label for="expenseAmount">Amount ($)</label>
+            <input type="number" id="expenseAmount" name="expenseAmount" min="0.01" step="0.01" placeholder="Enter amount" required>
+
+            <label for="paidBy">Paid By</label>
+            <select id="paidBy" name="paidBy" required>
+                <option value="">Select Roommate</option>
+                <option value="1">Alex</option>
+                <option value="2">Jordan</option>
+                <option value="3">Taylor</option>
+            </select>
+
+            <button type="submit">Add Expense</button>
+        </form>
+
+        <h3>Shared Expenses</h3>
+        <ul id="expenseList"></ul>
+        <p id="totalExpenses">Total Expenses: $0.00</p>
+    </section>
+</main>
+
+</body>
+</html>
