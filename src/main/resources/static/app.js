@@ -185,76 +185,115 @@ choreForm.addEventListener("submit", async function(event) {
 // Load saved chores when the page opens
 loadChores();
 
+
 const expenseForm = document.getElementById("expenseForm");
 const expenseName = document.getElementById("expenseName");
 const expenseAmount = document.getElementById("expenseAmount");
 const paidBy = document.getElementById("paidBy");
 const expenseList = document.getElementById("expenseList");
 const totalExpenses = document.getElementById("totalExpenses");
-//test roommates for presentation
+
 const roommates = ["Alex", "Jordan", "Taylor"];
-let expenseTotal = 0;
 
-// Use dollars
-function formatMoney(cents) {
-    return "$" + (cents / 100).toFixed(2);
+// Get expenses saved in MySQL
+async function loadExpenses() {
+    try {
+        const expenses = await choreRequest("/api/expenses");
+        displayExpenses(expenses);
+    } catch (error) {
+        console.error("Could not load expenses:", error);
+        expenseList.textContent = "Unable to load expenses.";
+    }
 }
 
-function updateExpenseTotal() {
+// Show saved expenses on the page
+function displayExpenses(expenses) {
+    expenseList.replaceChildren();
+
+    let total = 0;
+
+    expenses.forEach(function(expense) {
+        total += expense.amount;
+
+        const li = document.createElement("li");
+
+        const details = document.createElement("span");
+        details.textContent =
+            expense.name + " — $" +
+            expense.amount.toFixed(2) +
+            " | Paid by " + expense.paidBy;
+
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.textContent = "Delete";
+
+        deleteButton.addEventListener("click", async function() {
+            deleteButton.disabled = true;
+
+            try {
+                await choreRequest(
+                    "/api/expenses/" + expense.id,
+                    "DELETE"
+                );
+
+                await loadExpenses();
+            } catch (error) {
+                deleteButton.disabled = false;
+                alert("Could not delete expense: " + error.message);
+            }
+        });
+
+        li.appendChild(details);
+        li.appendChild(deleteButton);
+        expenseList.appendChild(li);
+    });
+
     totalExpenses.textContent =
-        "Total Expenses: " + formatMoney(expenseTotal);
+        "Total Expenses: $" + total.toFixed(2);
 }
 
-expenseForm.addEventListener("submit", function(event) {
+// Save a new expense to MySQL
+expenseForm.addEventListener("submit", async function(event) {
     event.preventDefault();
 
     const name = expenseName.value.trim();
     const amount = Number(expenseAmount.value);
-    const cents = Math.round(amount * 100);
     const payerIndex = Number(paidBy.value) - 1;
 
-    if (!name || !Number.isSafeInteger(cents) ||
-        cents <= 0 || payerIndex < 0 ||
+    if (!name || !Number.isFinite(amount) ||
+        amount <= 0 || payerIndex < 0 ||
         payerIndex >= roommates.length) {
         return;
     }
-    const payer = roommates[payerIndex];
 
-    // Divide the expense, considering the extra cents
-    const baseShare = Math.floor(cents / roommates.length);
-    const remainder = cents % roommates.length;
-    const shares = roommates.map((person, index) => {
-        return baseShare + (index < remainder ? 1 : 0);
-    });
+    const expense = {
+        name: name,
+        description: "",
+        category: "OTHER",
+        amount: amount,
+        paidBy: roommates[payerIndex],
+        members: roommates,
+        percentages: {},
+        settled: false
+    };
 
-    const expenseItem = document.createElement("li");
-    const details = document.createElement("span");
-    const amountsOwed = roommates
-        .filter((person, index) => index !== payerIndex)
-        .map(person => {
-            const index = roommates.indexOf(person);
-            return person + " owes " + payer + " " +
-                formatMoney(shares[index]);
-        });
+    const button = expenseForm.querySelector(
+        'button[type="submit"]'
+    );
 
-    details.textContent =
-        name + " — " + formatMoney(cents) +
-        " | Paid by " + payer +
-        " | " + amountsOwed.join("; ");
+    button.disabled = true;
 
-    const deleteButton = document.createElement("button");
-    deleteButton.type = "button";
-    deleteButton.textContent = "Delete";
-    deleteButton.addEventListener("click", function() {
-        expenseItem.remove();
-        expenseTotal -= cents;
-        updateExpenseTotal();
-    });
+    try {
+        await choreRequest("/api/expenses", "POST", expense);
 
-    expenseItem.appendChild(details);
-    expenseItem.appendChild(deleteButton);
-    expenseList.appendChild(expenseItem);
-    expenseTotal += cents;
-    updateExpenseTotal();
-    expenseForm.reset();
+        expenseForm.reset();
+        await loadExpenses();
+    } catch (error) {
+        alert("Could not add expense: " + error.message);
+    } finally {
+        button.disabled = false;
+    }
 });
+
+// Display expenses when HomeSlice opens
+loadExpenses();
