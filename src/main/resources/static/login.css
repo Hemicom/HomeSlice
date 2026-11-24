@@ -1,0 +1,138 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont,
+                 "Segoe UI", Arial, sans-serif;
+    color: #203f4b;
+    background: #f7f6f2;
+}
+
+.login-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+}
+
+.welcome-panel {
+    background: #203f4b;
+    color: white;
+    padding: 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.welcome-panel h1 {
+    font-size: 36px;
+    margin: 0;
+}
+
+.tagline {
+    font-size: 32px;
+    font-weight: 600;
+    margin-top: 65px;
+}
+
+.welcome-panel p {
+    max-width: 420px;
+    line-height: 1.7;
+    color: #d8e2e5;
+}
+
+.footer-text {
+    font-size: 14px;
+}
+
+.login-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 35px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 380px;
+}
+
+.login-card h2 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.login-card > p {
+    color: #6c7c82;
+    margin-bottom: 30px;
+}
+
+.login-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.login-card label {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.login-card input:not([type="hidden"]) {
+    padding: 14px;
+    border: 1px solid #d2d8da;
+    border-radius: 8px;
+    font: inherit;
+    margin-bottom: 12px;
+}
+
+.login-card input:focus {
+    outline: 2px solid #ce8348;
+    outline-offset: 2px;
+}
+
+.login-card button {
+    background: #ce8348;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.login-card button:hover {
+    background: #ad6936;
+}
+
+.login-card button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.error-message {
+    color: #a12d2d !important;
+    font-size: 14px;
+}
+
+@media (max-width: 750px) {
+    .login-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome-panel {
+        padding: 30px;
+    }
+
+    .tagline {
+        font-size: 24px;
+        margin-top: 20px;
+    }
+
+    .login-panel {
+        padding: 40px 24px;
+    }
+}
