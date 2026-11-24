@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>HomeSlice | Sign In</title>
+    <link rel="stylesheet" href="./login.css">
+    <script src="./login.js" defer></script>
+</head>
+
+<body>
+<main class="loginlayout">
+    <!-- HomeSlice branding/title -->
+    <section class="welcome">
+        <div>
+
+            <!-- message making users feel at home -->
+            <h1> HomeSlice</h1>
+            <p class="tagline">Better living, together.</p>
+            <p>
+                Household Organization all in
+                one Place.
+            </p>
+        </div>
+            <!-- more welcoming messages -->
+        <p class="footer-text">Your home, prioritize organization.</p>
+    </section>
+
+    <section class="login-panel">
+        <div class="login-card">
+            <h2>Welcome Back!</h2>
+            <p>Sign in household dashboard.</p>
+            <!-- Displays an error if the login is incorrect -->
+            <p id="loginMessage"
+               class="error-message"
+               role="alert"
+               hidden></p>
+            <!-- username and password must go through Spring Security -->
+            <form id="loginForm"
+                  action="/login"
+                  method="post">
+                <!-- Stores the CSRF token for secure form submission -->
+                <!-- This prevents any cyber attack that may manipulate browser -->
+                <input type="hidden"
+                       id="csrfField"
+                       name="_csrf">
+
+                <label for="username">Username</label>
+                <input type="text"
+                       id="username"
+                       name="username"
+                       placeholder="Enter your username"
+                       autocomplete="username"
+                       required>
+
+                <label for="password">Password</label>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       placeholder="Enter your password"
+                       autocomplete="current-password"
+                       required>
+
+                <button id="signInButton"
+                        type="submit"
+                        disabled>
+                    Sign In
+                </button>
+            </form>
+        </div>
+    </section>
+
+</main>
+</body>
+</html>
